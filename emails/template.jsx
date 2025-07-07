@@ -46,10 +46,14 @@ const PREVIEW_DATA = {
 };
 
 export default function EmailTemplate({
-  userName = "",
+  userName,
   type = "monthly-report",
-  data = {},
+  data,
 }) {
+  // Use preview data if props are missing
+  const templateData = data || PREVIEW_DATA[type]?.data;
+  const name = userName || PREVIEW_DATA[type]?.userName;
+
   if (type === "monthly-report") {
     return (
       <Html>
@@ -59,34 +63,42 @@ export default function EmailTemplate({
           <Container style={styles.container}>
             <Heading style={styles.title}>Monthly Financial Report</Heading>
 
-            <Text style={styles.text}>Hello {userName},</Text>
+            <Text style={styles.text}>Hello {name},</Text>
             <Text style={styles.text}>
-              Here&rsquo;s your financial summary for {data?.month}:
+              Here&rsquo;s your financial summary for {templateData?.month}:
             </Text>
 
             {/* Main Stats */}
-            <Section style={styles.statsContainer}>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Total Income</Text>
-                <Text style={styles.heading}>${data?.stats.totalIncome}</Text>
-              </div>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Total Expenses</Text>
-                <Text style={styles.heading}>${data?.stats.totalExpenses}</Text>
-              </div>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Net</Text>
-                <Text style={styles.heading}>
-                  ${data?.stats.totalIncome - data?.stats.totalExpenses}
-                </Text>
-              </div>
-            </Section>
+            {templateData?.stats && (
+              <Section style={styles.statsContainer}>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Total Income</Text>
+                  <Text style={styles.heading}>
+                    ${templateData.stats.totalIncome}
+                  </Text>
+                </div>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Total Expenses</Text>
+                  <Text style={styles.heading}>
+                    ${templateData.stats.totalExpenses}
+                  </Text>
+                </div>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Net</Text>
+                  <Text style={styles.heading}>
+                    $
+                    {templateData.stats.totalIncome -
+                      templateData.stats.totalExpenses}
+                  </Text>
+                </div>
+              </Section>
+            )}
 
             {/* Category Breakdown */}
-            {data?.stats?.byCategory && (
+            {templateData?.stats?.byCategory && (
               <Section style={styles.section}>
                 <Heading style={styles.heading}>Expenses by Category</Heading>
-                {Object.entries(data?.stats.byCategory).map(
+                {Object.entries(templateData.stats.byCategory).map(
                   ([category, amount]) => (
                     <div key={category} style={styles.row}>
                       <Text style={styles.text}>{category}</Text>
@@ -98,10 +110,10 @@ export default function EmailTemplate({
             )}
 
             {/* AI Insights */}
-            {data?.insights && (
+            {templateData?.insights && (
               <Section style={styles.section}>
-                <Heading style={styles.heading}>Welth Insights</Heading>
-                {data.insights.map((insight, index) => (
+                <Heading style={styles.heading}>fINSIGHTS</Heading>
+                {templateData.insights.map((insight, index) => (
                   <Text key={index} style={styles.text}>
                     • {insight}
                   </Text>
@@ -110,7 +122,7 @@ export default function EmailTemplate({
             )}
 
             <Text style={styles.footer}>
-              Thank you for using Welth. Keep tracking your finances for better
+              Thank you for using FinSight. Keep tracking your finances for better
               financial health!
             </Text>
           </Container>
@@ -127,32 +139,56 @@ export default function EmailTemplate({
         <Body style={styles.body}>
           <Container style={styles.container}>
             <Heading style={styles.title}>Budget Alert</Heading>
-            <Text style={styles.text}>Hello {userName},</Text>
+            <Text style={styles.text}>Hello {name},</Text>
             <Text style={styles.text}>
-              You&rsquo;ve used {data?.percentageUsed.toFixed(1)}% of your
+              You&rsquo;ve used{" "}
+              {templateData?.percentageUsed?.toFixed(1) ?? "--"}% of your
               monthly budget.
             </Text>
-            <Section style={styles.statsContainer}>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Budget Amount</Text>
-                <Text style={styles.heading}>${data?.budgetAmount}</Text>
-              </div>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Spent So Far</Text>
-                <Text style={styles.heading}>${data?.totalExpenses}</Text>
-              </div>
-              <div style={styles.stat}>
-                <Text style={styles.text}>Remaining</Text>
-                <Text style={styles.heading}>
-                  ${data?.budgetAmount - data?.totalExpenses}
-                </Text>
-              </div>
-            </Section>
+            {templateData && (
+              <Section style={styles.statsContainer}>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Budget Amount</Text>
+                  <Text style={styles.heading}>
+                    ${templateData.budgetAmount}
+                  </Text>
+                </div>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Spent So Far</Text>
+                  <Text style={styles.heading}>
+                    ${templateData.totalExpenses}
+                  </Text>
+                </div>
+                <div style={styles.stat}>
+                  <Text style={styles.text}>Remaining</Text>
+                  <Text style={styles.heading}>
+                    $
+                    {templateData.budgetAmount -
+                      templateData.totalExpenses}
+                  </Text>
+                </div>
+              </Section>
+            )}
           </Container>
         </Body>
       </Html>
     );
   }
+
+  // Fallback for unknown type
+  return (
+    <Html>
+      <Head />
+      <Body style={styles.body}>
+        <Container style={styles.container}>
+          <Heading style={styles.title}>Unknown Template</Heading>
+          <Text style={styles.text}>
+            The email type <b>{type}</b> is not supported.
+          </Text>
+        </Container>
+      </Body>
+    </Html>
+  );
 }
 
 const styles = {
