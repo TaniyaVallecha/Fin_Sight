@@ -33,24 +33,17 @@ FinSight is your **smart financial assistant** designed to help you track expens
 
 ### 🏠 Dashboard
 ![Dashboard](./Images/DashBoard.png)
-![Dashboard](./images/Graphs.png)
-![Multiple Accounts](./images/Account.png)
+![Dashboard](.Images/Graphs.png)
+![Multiple Accounts](./Images/Account.png)
 
 ### 📃 Scan Receipts to Add Transactions
-![Receipt Scanner](./images/Add Transaction.png)
+![Receipt Scanner](./Images/Add Transaction.png)
 
 ### 👥 Manage Multiple Accounts
-![Multiple Accounts](./images/New Account.png)
+![Multiple Accounts](./Images/New Account.png)
 
 ### 📈 Monthly Reports with AI Insights
-![AI Insights](./images/Monthly Report.png)
-![AI Insights](./images/Monthly Report (2).png)
+![AI Insights](./Images/Monthly Report.png)
+![AI Insights](./Images/Monthly Report (2).png)
 
----
 
-## ⚡ Getting Started
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/<your-username>/finsight.git
-   cd finsight
