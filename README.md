@@ -33,7 +33,7 @@ FinSight is your **smart financial assistant** designed to help you track expens
 
 ### 🏠 Dashboard
 ![Dashboard](./Images/DashBoard.png)
-![Dashboard](.Images/Graphs.png)
+![Dashboard](./Images/Graphs.png)
 ![Multiple Accounts](./Images/Account.png)
 
 ### 📃 Scan Receipts to Add Transactions
