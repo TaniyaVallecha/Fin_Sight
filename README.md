@@ -24,7 +24,6 @@ FinSight is your **smart financial assistant** designed to help you track expens
 - **Backend**: [Prisma](https://www.prisma.io/), Node.js  
 - **AI Integration**: [Gemini API](https://deepmind.google/technologies/gemini/) for financial insights  
 - **Task Scheduler**: [Inngest](https://www.inngest.com/) for background jobs and cron tasks  
-- **Hosting**: [Vercel](https://vercel.com/)  
 - **Email Service**: Resend API for sending beautifully designed React email templates  
 
 ---
