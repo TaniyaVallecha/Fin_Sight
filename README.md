@@ -2,7 +2,7 @@
 
 FinSight is your **smart financial assistant** designed to help you track expenses, manage accounts, and gain actionable insights into your spending habits. With AI-generated reports, receipt scanning, and intuitive dashboards, FinSight gives you a complete picture of your finances.  
 
-![FinSight Hero](./images/Landing Page.png)
+![FinSight Hero](./Images/Landing Page.png)
 
 ---
 
@@ -32,7 +32,7 @@ FinSight is your **smart financial assistant** designed to help you track expens
 ## 📸 Screenshots
 
 ### 🏠 Dashboard
-![Dashboard](./images/DashBoard.png)
+![Dashboard](./Images/DashBoard.png)
 ![Dashboard](./images/Graphs.png)
 ![Multiple Accounts](./images/Account.png)
 
